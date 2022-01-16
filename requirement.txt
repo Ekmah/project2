@@ -1,0 +1,13 @@
+
+
+beautifulsoup4	4.10.0	4.10.0
+certifi	2021.10.8	2021.10.8
+charset-normalizer	2.0.10	2.0.10
+idna	3.3	3.3
+lxml	4.7.1	4.7.1
+pip	21.1.2	21.3.1
+requests	2.27.1	2.27.1
+setuptools	57.0.0	60.5.0
+soupsieve	2.3.1	2.3.1
+urllib3	1.26.8	1.26.8
+wheel	0.36.2	0.37.1
