@@ -71,4 +71,3 @@ get_all_categories("http://books.toscrape.com/index.html")
 
 # if __name__ == '__main__':
 #     print_hi('PyCharm')
-
