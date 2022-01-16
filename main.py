@@ -8,17 +8,18 @@ import os
 
 
 def get_all_categories(link):
+    t = time.time()
     response = requests.get(link)
     html = response.content
     soup = bs(html, "lxml")
     categories = soup.find(class_='side_categories').find('ul', recursive=False).find('ul').find_all('a', href=True)
     for categorie in categories:
         categorie_link = urljoin(link, categorie['href'])
-        get_product_of_categorie(categorie_link)
+        get_product_of_categorie(categorie_link, [])
+    print(time.time() - t)
 
 
 def get_product_of_categorie(category_url, products=[]):
-    print(category_url)
     response = requests.get(category_url)
     html = response.content
     soup = bs(html, "lxml")
