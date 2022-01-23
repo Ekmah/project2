@@ -68,7 +68,7 @@ def scrap_product(product_page_url):
     review_rating = soup.find('p', class_="star-rating")['class'][1]
 
     image_url = urljoin(product_page_url, soup.find("img")["src"])
-    print(image_url)
+    # print(image_url)
     img_data = requests.get(image_url).content
     image_name = f'Images/{os.path.basename(image_url)}'
     os.makedirs(os.path.dirname(image_name), exist_ok=True)
