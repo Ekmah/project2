@@ -7,6 +7,7 @@ import csv
 import os
 
 
+
 def get_all_categories(link):
     t = time.time()
     response = requests.get(link)
@@ -31,6 +32,7 @@ def get_product_of_categorie(category_url, products=[]):
     next_page = soup.find(class_="next")
     if next_page:
         link = urljoin(category_url, next_page.find('a', href=True)['href'])
+        print(link)
         get_product_of_categorie(link, products)
     else:
         category = soup.find('h1').get_text().replace(" ", "_")
@@ -52,9 +54,6 @@ def scrap_product(product_page_url):
     content = get_table(soup)
     number_available = soup.find("p", class_="instock availability").get_text().strip()
 
-    # print(int(re.findall(r"\d+", number_available)[0]))
-    # print(int(''.join(filter(str.isdigit, number_available))))
-
     universal_product_code = content['UPC']
     title = soup.find('h1').get_text()
     price_including_tax = content['Price (incl. tax)']
@@ -67,7 +66,14 @@ def scrap_product(product_page_url):
         product_description = 'No description'
     category = soup.select_one("a[href*=category\/books\/]").get_text()
     review_rating = soup.find('p', class_="star-rating")['class'][1]
-    image_url = soup.find("img")["src"]
+
+    image_url = urljoin(product_page_url, soup.find("img")["src"])
+    print(image_url)
+    img_data = requests.get(image_url).content
+    image_name = f'Images/{os.path.basename(image_url)}'
+    os.makedirs(os.path.dirname(image_name), exist_ok=True)
+    with open(image_name, 'wb') as handler:
+        handler.write(img_data)
 
     return {"product_page_url": product_page_url, "universal_product_code": universal_product_code,
             "title": title, "price_including_tax": price_including_tax, "price_excluding_tax": price_excluding_tax,
