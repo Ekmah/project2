@@ -13,5 +13,5 @@ python main.py
 ```
 ## Output:
 - Un dossier CSVs avec des fichiers CSV pour chacunes des catégories de livres sur le site.
-- Un dossier Images avec chaques images de couvertures des livres du site.
+- Un dossier Images avec chaques images de couverture des livres du site.
 - Dans le terminal, via `print()`, le lien de chacune des catégories de livres et de leur multiple pages si existantes.
