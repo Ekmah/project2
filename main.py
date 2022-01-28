@@ -20,6 +20,7 @@ def get_all_categories(link):
 
 
 def get_product_of_categorie(category_url, products=[]):
+    print(category_url)
     response = requests.get(category_url)
     html = response.content
     soup = bs(html, "lxml")
@@ -31,7 +32,6 @@ def get_product_of_categorie(category_url, products=[]):
     next_page = soup.find(class_="next")
     if next_page:
         link = urljoin(category_url, next_page.find('a', href=True)['href'])
-        print(link)
         get_product_of_categorie(link, products)
     else:
         category = soup.find('h1').get_text().replace(" ", "_")
